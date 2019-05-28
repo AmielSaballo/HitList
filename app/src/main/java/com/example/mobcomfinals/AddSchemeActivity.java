@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddSchemeActivity extends Activity implements OnClickListener {
 
@@ -37,7 +38,15 @@ public class AddSchemeActivity extends Activity implements OnClickListener {
                 Scheme scheme = new Scheme(schemeName.getText().toString(),
                         schemeDesc.getText().toString());
 
-                db.createScheme(scheme);
+                if (scheme.getDesc() == null) {
+                    scheme.setDesc("");
+                }
+
+//                Toast.makeText(this,
+//                        scheme.getTitle() + " " + scheme.getDesc(),
+//                        Toast.LENGTH_LONG).show();
+
+                long scheme_id = db.createScheme(scheme);
 
                 Intent main = new Intent(this, ViewHitListActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

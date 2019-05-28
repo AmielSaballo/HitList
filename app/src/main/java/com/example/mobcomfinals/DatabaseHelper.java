@@ -65,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             +");";
     private static final String CREATE_TABLE_SMT = "CREATE TABLE " + TABLE_SCHEME_MILESTONE_TASK
             + "("
-            + KEY_ID + " INTEGER PRIMARY KEY, "
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_SCHEME_ID + " INTEGER, "
             + KEY_MILESTONE_ID + " INTEGER, "
             + KEY_TASK_ID + " INTEGER"
@@ -116,15 +116,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void createScheme(Scheme scheme) {
+    public long createScheme(Scheme scheme) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_TITLE,scheme.getTitle());
+        values.put(KEY_TITLE, scheme.getTitle());
         values.put(KEY_DESC, scheme.getDesc());
         values.put(KEY_STATUS, scheme.getStatus());
 
-        db.insert(TABLE_SCHEME, null, values);
+        long scheme_id = db.insert(TABLE_SCHEME, null, values);
+
+        return scheme_id;
     }
 
     public Scheme getScheme(long scheme_id) {

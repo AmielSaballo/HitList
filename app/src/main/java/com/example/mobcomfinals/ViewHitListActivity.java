@@ -9,9 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class ViewHitListActivity extends AppCompatActivity {
 
@@ -20,7 +24,8 @@ public class ViewHitListActivity extends AppCompatActivity {
 
     private ListView listView;
 
-    private SimpleCursorAdapter adapter;
+//    private SimpleCursorAdapter adapter;
+    ArrayAdapter<Scheme> adapter;
 
     private Scheme scheme;
 
@@ -46,15 +51,37 @@ public class ViewHitListActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.schemeList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
 
-        adapter = new SimpleCursorAdapter(this,
-                R.layout.activity_listview_view,
-                cursor,
-                from,
-                to,
-                0);
-        adapter.notifyDataSetChanged();
+//        adapter = new SimpleCursorAdapter(this,
+//                R.layout.activity_listview_view,
+//                cursor,
+//                from,
+//                to,
+//                0);
+//        adapter.notifyDataSetChanged();
 
-        listView.setAdapter(adapter);
+        adapter = new ArrayAdapter<Scheme>(this,
+                android.R.layout.activity_list_item,
+                android.R.id.text1,
+                db.getAllSchemes());
+
+        if (cursor == null) {
+            Toast.makeText(this,
+                    "empty",
+                    Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this,
+                    "not empty",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        ArrayAdapter<String> aaaaaaa = new ArrayAdapter<String>(
+                this,
+                android.R.layout.activity_list_item,
+                android.R.id.text1,
+                new  String[] {"asaaasda", "asdasdasd"}
+        );
+
+        listView.setAdapter(aaaaaaa);
 
         // OnCLickListener For List Items
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
