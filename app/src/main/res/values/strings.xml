@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HitList</string>
+    <string name="empty">Your list HitList is empty. Please add something to do.</string>
+    <string name="add_Scheme">Add Scheme</string>
+    <string name="enter_desc">Describe this Scheme</string>
+    <string name="enter_scheme">Name of Scheme</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+</resources>
