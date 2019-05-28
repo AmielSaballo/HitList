@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ViewHitListActivity extends AppCompatActivity {
 
@@ -25,6 +24,10 @@ public class ViewHitListActivity extends AppCompatActivity {
             DatabaseHelper.SUBJECT, DatabaseHelper.DESC };
 
     final int[] to = new int[] { R.id.id, R.id.title, R.id.desc };
+
+    TextView idTextView;
+    TextView titleTextView;
+    TextView descTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +50,13 @@ public class ViewHitListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
-                TextView idTextView = (TextView) view.findViewById(R.id.id);
-                TextView titleTextView = (TextView) view.findViewById(R.id.title);
-                TextView descTextView = (TextView) view.findViewById(R.id.desc);
+                idTextView = (TextView) view.findViewById(R.id.id);
+//                titleTextView = (TextView) view.findViewById(R.id.title);
+//                descTextView = (TextView) view.findViewById(R.id.desc);
 //
-                String id = idTextView.getText().toString();
-                String title = titleTextView.getText().toString();
-                String desc = descTextView.getText().toString();
+//                String id = idTextView.getText().toString();
+//                String title = titleTextView.getText().toString();
+//                String desc = descTextView.getText().toString();
 //
 //                Intent modify_intent = new Intent(getApplicationContext(), ModifySchemeActivity.class);
 //                modify_intent.putExtra("title", title);
@@ -61,9 +64,12 @@ public class ViewHitListActivity extends AppCompatActivity {
 //                modify_intent.putExtra("id", id);
 //
 //                startActivity(modify_intent);
-                Toast.makeText(this,
-                        "is",
-                        Toast.LENGTH_LONG).show();
+
+                String idNumber = idTextView.getText().toString();
+
+                Intent viewMilestone = new Intent(getApplicationContext(), ViewMilestoneActivity.class);
+                viewMilestone.putExtra("id", idNumber);
+                startActivity(viewMilestone);
             }
         });
     }
@@ -71,6 +77,15 @@ public class ViewHitListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
+//        if (adapter == null) {
+//            menu.findItem(R.id.edit_scheme).setEnabled(false);
+//            menu.findItem(R.id.edit_scheme).setVisible(false);
+//        } else {
+//            menu.findItem(R.id.edit_scheme).setEnabled(true);
+//            menu.findItem(R.id.edit_scheme).setVisible(true);
+//        }
+
         return true;
     }
 
@@ -82,24 +97,16 @@ public class ViewHitListActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.add_scheme:
-                Intent add_mem = new Intent(this, AddSchemeActivity.class);
-                startActivity(add_mem);
+                Intent add_scheme = new Intent(this, AddSchemeActivity.class);
+                startActivity(add_scheme);
                 break;
             case R.id.edit_scheme:
-                TextView idTextView = (TextView) view.findViewById(R.id.id);
-                TextView titleTextView = (TextView) view.findViewById(R.id.title);
-                TextView descTextView = (TextView) view.findViewById(R.id.desc);
+                Intent edit_scheme = new Intent(this, ModifySchemeActivity.class);
+                edit_scheme.putExtra("title", titleTextView.getText().toString());
+                edit_scheme.putExtra("desc", descTextView.getText().toString());
+                edit_scheme.putExtra("id", idTextView.getText().toString());
 
-                String number = idTextView.getText().toString();
-                String title = titleTextView.getText().toString();
-                String desc = descTextView.getText().toString();
-
-                Intent modify_intent = new Intent(getApplicationContext(), ModifySchemeActivity.class);
-                modify_intent.putExtra("title", title);
-                modify_intent.putExtra("desc", desc);
-                modify_intent.putExtra("id", number);
-
-                startActivity(modify_intent);
+                startActivity(edit_scheme);
         }
 //        if (id == R.id.add_scheme) {
 //
