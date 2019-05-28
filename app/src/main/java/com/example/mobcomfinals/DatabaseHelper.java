@@ -3,6 +3,7 @@ package com.example.mobcomfinals;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
+    private SQLiteDatabase database;
 
     //Logcat Tag
     private static final String LOG = "DatabaseHelper";
@@ -28,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_SCHEME_MILESTONE_TASK = "S_M_T";
 
     // Table columns
-    public static final String KEY_ID = "id";
+    public static final String KEY_ID = "_id";
     public static final String KEY_TITLE = "title";
     public static final String KEY_DESC = "description";
     private static final String KEY_STATUS = "status";
@@ -88,6 +91,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_SMT);
 
         onCreate(db);
+    }
+
+    public DatabaseHelper open() throws SQLException {
+        database = this.getWritableDatabase();
+        return this;
+    }
+
+    public Cursor fetch() {
+        String[] columns = new String[] { DatabaseHelper.KEY_ID,
+                DatabaseHelper.KEY_TITLE,
+                DatabaseHelper.KEY_DESC };
+        Cursor cursor = database.query(DatabaseHelper.TABLE_SCHEME,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
     }
 
     public void createScheme(Scheme scheme) {

@@ -54,7 +54,7 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
                 break;
 
             case R.id.btnDelete:
-                Long _id = Long.parseLong(String.valueOf(scheme.getId()));
+                _id = Long.parseLong(String.valueOf(scheme.getId()));
                 db.deleteScheme(_id);
                 this.returnHome();
                 break;

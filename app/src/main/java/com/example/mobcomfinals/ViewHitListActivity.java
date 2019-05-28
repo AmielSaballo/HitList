@@ -17,7 +17,6 @@ public class ViewHitListActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
 
-    private SQLiteDatabase helper;
 
     private ListView listView;
 
@@ -41,16 +40,8 @@ public class ViewHitListActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(getApplicationContext());
 
-        String[] columns = new String[] { DatabaseHelper.KEY_ID,
-                DatabaseHelper.KEY_TITLE,
-                DatabaseHelper.KEY_DESC };
-        Cursor cursor = helper.query(DatabaseHelper.TABLE_SCHEME,
-                columns,
-                null,
-                null,
-                null,
-                null,
-                null);
+        db.open();
+        Cursor cursor = db.fetch();
 
         listView = (ListView) findViewById(R.id.schemeList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
@@ -65,7 +56,7 @@ public class ViewHitListActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // OnCLickListiner For List Items
+        // OnCLickListener For List Items
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
@@ -110,9 +101,6 @@ public class ViewHitListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        View view = this.findViewById(R.id.content);
-
         int id = item.getItemId();
         switch (id) {
             case R.id.add_scheme:
