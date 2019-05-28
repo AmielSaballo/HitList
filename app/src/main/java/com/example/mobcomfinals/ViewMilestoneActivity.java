@@ -21,7 +21,7 @@ public class ViewMilestoneActivity extends AppCompatActivity {
     private SimpleCursorAdapter adapter;
 
     final String[] from = new String[] { DatabaseHelper._ID,
-            DatabaseHelper.SUBJECT, DatabaseHelper.DESC };
+            DatabaseHelper.SUBJECT, DatabaseHelper.KEY_DESC};
 
     final int[] to = new int[] { R.id.id, R.id.title, R.id.desc };
 

@@ -14,16 +14,12 @@ import android.widget.TextView;
 
 public class ViewHitListActivity extends AppCompatActivity {
 
-    private DBManager dbManager;
+    private DatabaseHelper db;
 
     private ListView listView;
 
     private SimpleCursorAdapter adapter;
 
-    final String[] from = new String[] { DatabaseHelper._ID,
-            DatabaseHelper.SUBJECT, DatabaseHelper.DESC };
-
-    final int[] to = new int[] { R.id.id, R.id.title, R.id.desc };
 
     TextView idTextView;
     TextView titleTextView;
@@ -34,14 +30,12 @@ public class ViewHitListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_schemes);
 
-        dbManager = new DBManager(this);
-        dbManager.open();
-        Cursor cursor = dbManager.fetch();
+        db = new DatabaseHelper(getApplicationContext());
 
         listView = (ListView) findViewById(R.id.schemeList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
 
-        adapter = new SimpleCursorAdapter(this, R.layout.activity_listview_view, cursor, from, to, 0);
+        adapter = new SimpleCursorAdapter(this, R.layout.activity_listview_view);
         adapter.notifyDataSetChanged();
 
         listView.setAdapter(adapter);
