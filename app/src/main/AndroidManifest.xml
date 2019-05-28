@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ModifySchemeActivity"></activity>
+        <activity android:name=".ViewTaskActivity"></activity>
+        <activity android:name=".ModifySchemeActivity" />
         <activity android:name=".AddSchemeActivity" />
         <activity android:name=".ViewMilestoneActivity" />
         <activity android:name=".DBManager" />
