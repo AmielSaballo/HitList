@@ -1,6 +1,8 @@
 package com.example.mobcomfinals;
 
-public class Milestone {
+import java.io.Serializable;
+
+public class Milestone implements Serializable {
     int id;
     String title;
     String desc;

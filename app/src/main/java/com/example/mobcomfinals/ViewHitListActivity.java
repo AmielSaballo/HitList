@@ -2,6 +2,7 @@ package com.example.mobcomfinals;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,10 +17,18 @@ public class ViewHitListActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
 
+    private SQLiteDatabase helper;
+
     private ListView listView;
 
     private SimpleCursorAdapter adapter;
 
+    private Scheme scheme;
+
+    final String[] from = new String[] { DatabaseHelper.KEY_ID,
+            DatabaseHelper.KEY_TITLE, DatabaseHelper.KEY_DESC};
+
+    final int[] to = new int[] { R.id.id, R.id.title, R.id.desc };
 
     TextView idTextView;
     TextView titleTextView;
@@ -32,10 +41,26 @@ public class ViewHitListActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(getApplicationContext());
 
+        String[] columns = new String[] { DatabaseHelper.KEY_ID,
+                DatabaseHelper.KEY_TITLE,
+                DatabaseHelper.KEY_DESC };
+        Cursor cursor = helper.query(DatabaseHelper.TABLE_SCHEME,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null);
+
         listView = (ListView) findViewById(R.id.schemeList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
 
-        adapter = new SimpleCursorAdapter(this, R.layout.activity_listview_view);
+        adapter = new SimpleCursorAdapter(this,
+                R.layout.activity_listview_view,
+                cursor,
+                from,
+                to,
+                0);
         adapter.notifyDataSetChanged();
 
         listView.setAdapter(adapter);
@@ -96,9 +121,11 @@ public class ViewHitListActivity extends AppCompatActivity {
                 break;
             case R.id.edit_scheme:
                 Intent edit_scheme = new Intent(this, ModifySchemeActivity.class);
-                edit_scheme.putExtra("title", titleTextView.getText().toString());
-                edit_scheme.putExtra("desc", descTextView.getText().toString());
-                edit_scheme.putExtra("id", idTextView.getText().toString());
+                scheme.setId(Integer.parseInt(idTextView.getText().toString()));
+                scheme.setTitle(titleTextView.getText().toString());
+                scheme.setDesc(descTextView.getText().toString());
+
+                edit_scheme.putExtra("scheme", scheme);
 
                 startActivity(edit_scheme);
         }

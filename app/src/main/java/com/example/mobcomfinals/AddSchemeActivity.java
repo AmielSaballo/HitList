@@ -14,7 +14,7 @@ public class AddSchemeActivity extends Activity implements OnClickListener {
     private EditText schemeName;
     private EditText schemeDesc;
 
-    private DBManager dbManager;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,6 @@ public class AddSchemeActivity extends Activity implements OnClickListener {
 
         addBtn = (Button) findViewById(R.id.addScheme);
 
-        dbManager = new DBManager(this);
-        dbManager.open();
         addBtn.setOnClickListener(this);
     }
 
@@ -36,13 +34,12 @@ public class AddSchemeActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addScheme:
+                Scheme scheme = new Scheme(schemeName.getText().toString(),
+                        schemeDesc.getText().toString());
 
-                final String name = schemeName.getText().toString();
-                final String desc = schemeDesc.getText().toString();
+                db.createScheme(scheme);
 
-                dbManager.insert(name, desc);
-
-                Intent main = new Intent(AddSchemeActivity.this, ViewHitListActivity.class)
+                Intent main = new Intent(this, ViewHitListActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 startActivity(main);

@@ -1,6 +1,8 @@
 package com.example.mobcomfinals;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     int id;
     String title;
     String desc;

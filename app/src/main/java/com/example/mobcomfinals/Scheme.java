@@ -1,6 +1,8 @@
 package com.example.mobcomfinals;
 
-public class Scheme {
+import java.io.Serializable;
+
+public class Scheme implements Serializable {
     int id;
     String title;
     String desc;
@@ -11,10 +13,9 @@ public class Scheme {
 
     }
 
-    public Scheme (String title, String desc, String status) {
+    public Scheme (String title, String desc) {
         this.title = title;
         this.desc = desc;
-        this.status = status;
     }
 
     public Scheme (int id, String title, String desc, String status) {

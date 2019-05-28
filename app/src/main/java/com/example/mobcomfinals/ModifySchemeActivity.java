@@ -14,8 +14,9 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
     private EditText descText;
 
     private long _id;
+    Scheme scheme;
 
-    private DBManager dbManager;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,6 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_scheme);
 
-        dbManager = new DBManager(this);
-        dbManager.open();
-
         titleText = (EditText) findViewById(R.id.txtSchemeName);
         descText = (EditText) findViewById(R.id.txtSchemeDesc);
 
@@ -35,14 +33,9 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
         deleteBtn = (Button) findViewById(R.id.btnDelete);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        String name = intent.getStringExtra("title");
-        String desc = intent.getStringExtra("desc");
+        scheme = (Scheme) intent.getSerializableExtra("scheme");
 
-        _id = Long.parseLong(id);
-
-        titleText.setText(name);
-        descText.setText(desc);
+        scheme = new Scheme();
 
         updateBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
@@ -52,15 +45,17 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnUpdate:
-                String title = titleText.getText().toString();
-                String desc = descText.getText().toString();
+                scheme.setTitle(titleText.getText().toString());
+                scheme.setDesc(descText.getText().toString());
 
-                dbManager.update(_id, title, desc);
+                db.updateScheme(scheme);
+
                 this.returnHome();
                 break;
 
             case R.id.btnDelete:
-                dbManager.delete(_id);
+                Long _id = Long.parseLong(String.valueOf(scheme.getId()));
+                db.deleteScheme(_id);
                 this.returnHome();
                 break;
         }

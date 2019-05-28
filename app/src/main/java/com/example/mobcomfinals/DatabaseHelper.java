@@ -22,15 +22,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "HitList";
 
     // Table Name
-    private static final String TABLE_SCHEME = "Schemes";
-    private static final String TABLE_MILESTONE = "Milestones";
-    private static final String TABLE_TASK = "Tasks";
-    private static final String TABLE_SCHEME_MILESTONE_TASK = "S_M_T";
+    public static final String TABLE_SCHEME = "Schemes";
+    public static final String TABLE_MILESTONE = "Milestones";
+    public static final String TABLE_TASK = "Tasks";
+    public static final String TABLE_SCHEME_MILESTONE_TASK = "S_M_T";
 
     // Table columns
-    private static final String KEY_ID = "id";
-    private static final String KEY_TITLE = "title";
-    private static final String KEY_DESC = "description";
+    public static final String KEY_ID = "id";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_DESC = "description";
     private static final String KEY_STATUS = "status";
 
     //SMT
@@ -90,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long createScheme(Scheme scheme, long[] id) {
+    public void createScheme(Scheme scheme) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -98,9 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_DESC, scheme.getDesc());
         values.put(KEY_STATUS, scheme.getStatus());
 
-        long scheme_id = db.insert(TABLE_SCHEME, null, values);
-
-        return scheme_id;
+        db.insert(TABLE_SCHEME, null, values);
     }
 
     public Scheme getScheme(long scheme_id) {
@@ -167,7 +165,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //----------------------------------------------------------------------------------------------
-    public long createMilestone(Milestone milestone, long[] id) {
+    public long createMilestone(Milestone milestone) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -242,7 +240,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(milestone_id)});
     }
     //----------------------------------------------------------------------------------------------
-    public long createMilestone(Task task, long[] id) {
+    public long createMilestone(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

@@ -2,6 +2,7 @@ package com.example.mobcomfinals;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,14 +15,18 @@ import android.widget.TextView;
 
 public class ViewMilestoneActivity extends AppCompatActivity {
 
-    private DBManager milestoneManager;
+    private DatabaseHelper db;
+
+    private SQLiteDatabase helper;
 
     private ListView listView;
 
     private SimpleCursorAdapter adapter;
 
-    final String[] from = new String[] { DatabaseHelper._ID,
-            DatabaseHelper.SUBJECT, DatabaseHelper.KEY_DESC};
+    private Milestone milestone;
+
+    final String[] from = new String[] { DatabaseHelper.KEY_ID,
+            DatabaseHelper.KEY_TITLE, DatabaseHelper.KEY_DESC};
 
     final int[] to = new int[] { R.id.id, R.id.title, R.id.desc };
 
@@ -34,14 +39,28 @@ public class ViewMilestoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_schemes);
 
-        milestoneManager = new DBManager(this);
-        milestoneManager.open();
-        Cursor cursor = milestoneManager.fetch();
+        db = new DatabaseHelper(getApplicationContext());
+
+        String[] columns = new String[] { DatabaseHelper.KEY_ID,
+                DatabaseHelper.KEY_TITLE,
+                DatabaseHelper.KEY_DESC };
+        Cursor cursor = helper.query(DatabaseHelper.TABLE_SCHEME,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null);
 
         listView = (ListView) findViewById(R.id.schemeList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
 
-        adapter = new SimpleCursorAdapter(this, R.layout.activity_listview_view, cursor, from, to, 0);
+        adapter = new SimpleCursorAdapter(this,
+                R.layout.activity_listview_view,
+                cursor,
+                from,
+                to,
+                0);
         adapter.notifyDataSetChanged();
 
         listView.setAdapter(adapter);
@@ -67,9 +86,9 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
                 String idNumber = idTextView.getText().toString();
 
-                Intent viewTask = new Intent(getApplicationContext(), ViewTaskActivity.class);
-                viewTask.putExtra("id", idNumber);
-                startActivity(viewTask);
+                Intent viewMilestone = new Intent(getApplicationContext(), ViewMilestoneActivity.class);
+                viewMilestone.putExtra("id", idNumber);
+                startActivity(viewMilestone);
             }
         });
     }
@@ -97,14 +116,16 @@ public class ViewMilestoneActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.add_scheme:
-                Intent add_milestone = new Intent(this, AddSchemeActivity.class);
-                startActivity(add_milestone);
+                Intent add_scheme = new Intent(this, AddSchemeActivity.class);
+                startActivity(add_scheme);
                 break;
             case R.id.edit_scheme:
                 Intent edit_scheme = new Intent(this, ModifySchemeActivity.class);
-                edit_scheme.putExtra("title", titleTextView.getText().toString());
-                edit_scheme.putExtra("desc", descTextView.getText().toString());
-                edit_scheme.putExtra("id", idTextView.getText().toString());
+                milestone.setId(Integer.parseInt(idTextView.getText().toString()));
+                milestone.setTitle(titleTextView.getText().toString());
+                milestone.setDesc(descTextView.getText().toString());
+
+                edit_scheme.putExtra("scheme", milestone);
 
                 startActivity(edit_scheme);
         }
