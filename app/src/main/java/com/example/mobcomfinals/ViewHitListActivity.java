@@ -74,14 +74,14 @@ public class ViewHitListActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
 
-        ArrayAdapter<String> aaaaaaa = new ArrayAdapter<String>(
-                this,
-                android.R.layout.activity_list_item,
-                android.R.id.text1,
-                new  String[] {"asaaasda", "asdasdasd"}
+//        ArrayAdapter<String> aaaaaaa = new ArrayAdapter<String>(
+//                this,
+//                android.R.layout.activity_list_item,
+//                android.R.id.text1,
+//                new  String[] {"asaaasda", "asdasdasd"}
         );
 
-        listView.setAdapter(aaaaaaa);
+        listView.setAdapter(adapter);
 
         // OnCLickListener For List Items
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
