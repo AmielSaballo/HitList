@@ -37,7 +37,7 @@ public class ViewHitListActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.schemeList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
 
-        adapter = new SimpleCursorAdapter(this, R.layout.activity_view_milestone, cursor, from, to, 0);
+        adapter = new SimpleCursorAdapter(this, R.layout.activity_listview_view, cursor, from, to, 0);
         adapter.notifyDataSetChanged();
 
         listView.setAdapter(adapter);
