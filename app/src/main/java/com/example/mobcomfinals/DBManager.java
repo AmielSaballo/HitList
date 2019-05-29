@@ -56,22 +56,16 @@ public class DBManager {
         database.delete(DatabaseHelper.TABLE_SCHEME, DatabaseHelper.KEY_ID + "=" + _id, null);
     }
     //----------------------------------------------------------------------------------------------
-    public void insertMilestone(String name, String desc, String scheme_id) {
+    public void insertMilestone(String name, String desc) {
         ContentValues contentValue = new ContentValues();
         contentValue.put(DatabaseHelper.KEY_TITLE, name);
         contentValue.put(DatabaseHelper.KEY_DESC, desc);
-        contentValue.put(DatabaseHelper.FK_SCHEME_ID, scheme_id);
-
         database.insert(DatabaseHelper.TABLE_MILESTONE, null, contentValue);
     }
 
-    public Cursor fetchMilestone(long _id) {
-        String[] columns = new String[] { "*" };
-        String whereClause = DatabaseHelper.FK_SCHEME_ID + " = ?";
-        String[] whereArg = {String.valueOf(_id)};
-
-        Cursor cursor = database.query(DatabaseHelper.TABLE_MILESTONE, columns, whereClause, whereArg, null, null, null);
-
+    public Cursor fetchMilestones() {
+        String[] columns = new String[] { DatabaseHelper.KEY_ID, DatabaseHelper.KEY_TITLE, DatabaseHelper.KEY_DESC};
+        Cursor cursor = database.query(DatabaseHelper.TABLE_MILESTONE, columns, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }

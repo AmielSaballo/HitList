@@ -21,6 +21,8 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
     private SimpleCursorAdapter adapter;
 
+    long _id;
+
     final String[] from = new String[] { DatabaseHelper.KEY_ID,
             DatabaseHelper.KEY_TITLE, DatabaseHelper.KEY_DESC};
 
@@ -32,23 +34,15 @@ public class ViewMilestoneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_milestone_view);
 
         String scheme_id = getIntent().getStringExtra("scheme_id");
-        long _id = 50;
-//        Toast.makeText(this,
-//                scheme_id,
-//                Toast.LENGTH_LONG).show();
+        _id = Long.parseLong(scheme_id);
+
         if (scheme_id != null) {
             return;
-        }else {
-//            _id = Long.parseLong(scheme_id);
         }
-//        String scheme_id = scheme.getStringExtra("scheme_id");
-//        if (scheme_id != null) {
-//            _id = Long.parseLong(scheme_id);
-//        }
 
         dbManager = new DBManager(this);
         dbManager.open();
-        Cursor cursor = dbManager.fetchMilestone(_id);
+        Cursor cursor = dbManager.fetchMilestones();
 
         listView = (ListView) findViewById(R.id.milestoneList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
@@ -94,13 +88,8 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == R.id.menu_add) {
-            long _id = 50;
             Intent add_mem = new Intent(this, AddMilestoneActivity.class);
-            add_mem.putExtra("scheme_id", _id);
-
-            Toast.makeText(this,
-                    String.valueOf(_id),
-                    Toast.LENGTH_LONG).show();
+            add_mem.putExtra("scheme_id", String.valueOf(_id));
 
             startActivity(add_mem);
 
