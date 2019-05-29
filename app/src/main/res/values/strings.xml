@@ -12,6 +12,8 @@
     <string name="milestone_name">Name of Milestone</string>
     <string name="task_desc">Describe this Task</string>
     <string name="task_name">Name of Task</string>
-    <string name="update">Update</string>
+    <string name="update_btn">Update</string>
+    <string name="edit">Edit</string>
+    <string name="add">Add</string>
     <string name="delete">Delete</string>
 </resources>

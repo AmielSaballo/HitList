@@ -28,11 +28,11 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
         dbManager = new DBManager(this);
         dbManager.open();
 
-        titleText = (EditText) findViewById(R.id.txtSchemeName);
-        descText = (EditText) findViewById(R.id.txtSchemeDesc);
+        titleText = (EditText) findViewById(R.id.schemeName);
+        descText = (EditText) findViewById(R.id.schemeDesc);
 
-        updateBtn = (Button) findViewById(R.id.btnUpdate);
-        deleteBtn = (Button) findViewById(R.id.btnDelete);
+        updateBtn = (Button) findViewById(R.id.btn_update);
+        deleteBtn = (Button) findViewById(R.id.btn_delete);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -51,7 +51,7 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnUpdate:
+            case R.id.btn_update:
                 String title = titleText.getText().toString();
                 String desc = descText.getText().toString();
 
@@ -59,8 +59,8 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
                 this.returnHome();
                 break;
 
-            case R.id.btnDelete:
-                dbManager.delete(_id);
+            case R.id.btn_delete:
+                dbManager.deleteScheme(_id);
                 this.returnHome();
                 break;
         }

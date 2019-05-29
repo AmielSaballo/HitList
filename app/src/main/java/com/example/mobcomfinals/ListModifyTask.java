@@ -4,22 +4,21 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
-public class ViewTaskActivity extends AppCompatActivity {
+public class ListModifyTask extends AppCompatActivity {
 
     private DBManager dbManager;
 
     private ListView listView;
 
-    private SimpleCursorAdapter adapter;
-
     long _id;
+
+    private SimpleCursorAdapter adapter;
 
     final String[] from = new String[] { DatabaseHelper.KEY_ID,
             DatabaseHelper.KEY_TITLE, DatabaseHelper.KEY_DESC};
@@ -46,37 +45,26 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // OnCLickListener For List Items
+        // OnCLickListiner For List Items
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
-                view.setSelected(true);
+                TextView idTextView = (TextView) view.findViewById(R.id.id);
+                TextView titleTextView = (TextView) view.findViewById(R.id.title);
+                TextView descTextView = (TextView) view.findViewById(R.id.desc);
+
+                String id = idTextView.getText().toString();
+                String title = titleTextView.getText().toString();
+                String desc = descTextView.getText().toString();
+
+                Intent modify_intent = new Intent(getApplicationContext(), ModifyTaskActivity.class);
+                modify_intent.putExtra("title", title);
+                modify_intent.putExtra("desc", desc);
+                modify_intent.putExtra("id", id);
+                modify_intent.putExtra("milestone_id", String.valueOf(_id));
+
+                startActivity(modify_intent);
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.menu_add:
-                Intent add_mem = new Intent(this, AddTaskActivity.class);
-                add_mem.putExtra("milestone_id", String.valueOf(_id));
-                startActivity(add_mem);
-                break;
-            case R.id.Edit:
-                Intent edit_mem = new Intent(this, ListModifyTask.class);
-                edit_mem.putExtra("milestone_id", String.valueOf(_id));
-                startActivity(edit_mem);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

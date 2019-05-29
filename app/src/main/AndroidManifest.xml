@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddTaskActivity"></activity>
+        <activity android:name=".ListModifyScheme"></activity>
+        <activity android:name=".ListModifyMilestone" />
+        <activity android:name=".ListModifyTask" />
+        <activity android:name=".AddTaskActivity" />
         <activity android:name=".AddMilestoneActivity" />
         <activity android:name=".ModifyTaskActivity" />
         <activity android:name=".ModifyMilestoneActivity" />

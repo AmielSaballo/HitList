@@ -52,7 +52,7 @@ public class DBManager {
         return i;
     }
 
-    public void delete(long _id) {
+    public void deleteScheme(long _id) {
         database.delete(DatabaseHelper.TABLE_SCHEME, DatabaseHelper.KEY_ID + "=" + _id, null);
     }
     //----------------------------------------------------------------------------------------------
@@ -84,6 +84,9 @@ public class DBManager {
         int i = database.update(DatabaseHelper.TABLE_MILESTONE, contentValues, DatabaseHelper.KEY_ID + " = " + _id, null);
         return i;
     }
+    public void deleteMilestone(long _id) {
+        database.delete(DatabaseHelper.TABLE_MILESTONE, DatabaseHelper.KEY_ID + "=" + _id, null);
+    }
     //----------------------------------------------------------------------------------------------
     public void insertTask(String name, String desc, String milestone_id) {
         ContentValues contentValue = new ContentValues();
@@ -112,6 +115,9 @@ public class DBManager {
         contentValues.put(DatabaseHelper.KEY_DESC, desc);
         int i = database.update(DatabaseHelper.TABLE_TASK, contentValues, DatabaseHelper.KEY_ID + " = " + _id, null);
         return i;
+    }
+    public void deleteTask(long _id) {
+        database.delete(DatabaseHelper.TABLE_TASK, DatabaseHelper.KEY_ID + "=" + _id, null);
     }
 }
 
