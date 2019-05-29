@@ -28,33 +28,80 @@ public class DBManager {
         dbHelper.close();
     }
 
-    public void insert(String name, String desc) {
+    public void insertScheme(String name, String desc) {
         ContentValues contentValue = new ContentValues();
-        contentValue.put(DatabaseHelper.SUBJECT, name);
-        contentValue.put(DatabaseHelper.DESC, desc);
-        database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
+        contentValue.put(DatabaseHelper.KEY_SUBJECT, name);
+        contentValue.put(DatabaseHelper.KEY_DESC, desc);
+        database.insert(DatabaseHelper.TABLE_SCHEME, null, contentValue);
     }
 
-    public Cursor fetch() {
-        String[] columns = new String[] { DatabaseHelper._ID, DatabaseHelper.SUBJECT, DatabaseHelper.DESC };
-        Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, null, null, null, null, null);
+    public Cursor fetchSchemes() {
+        String[] columns = new String[] { DatabaseHelper.KEY_ID, DatabaseHelper.KEY_SUBJECT, DatabaseHelper.KEY_DESC};
+        Cursor cursor = database.query(DatabaseHelper.TABLE_SCHEME, columns, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }
         return cursor;
     }
 
-    public int update(long _id, String name, String desc) {
+    public int updateScheme(long _id, String name, String desc) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseHelper.SUBJECT, name);
-        contentValues.put(DatabaseHelper.DESC, desc);
-        int i = database.update(DatabaseHelper.TABLE_NAME, contentValues, DatabaseHelper._ID + " = " + _id, null);
+        contentValues.put(DatabaseHelper.KEY_SUBJECT, name);
+        contentValues.put(DatabaseHelper.KEY_DESC, desc);
+        int i = database.update(DatabaseHelper.TABLE_SCHEME, contentValues, DatabaseHelper.KEY_ID + " = " + _id, null);
         return i;
     }
 
     public void delete(long _id) {
-        database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper._ID + "=" + _id, null);
+        database.delete(DatabaseHelper.TABLE_SCHEME, DatabaseHelper.KEY_ID + "=" + _id, null);
+    }
+    //----------------------------------------------------------------------------------------------
+    public void insertMilestone(String name, String desc) {
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(DatabaseHelper.KEY_SUBJECT, name);
+        contentValue.put(DatabaseHelper.KEY_DESC, desc);
+        database.insert(DatabaseHelper.TABLE_MILESTONE, null, contentValue);
     }
 
+    public Cursor fetchMilestone() {
+        String[] columns = new String[] { DatabaseHelper.KEY_ID, DatabaseHelper.KEY_SUBJECT, DatabaseHelper.KEY_DESC};
+        Cursor cursor = database.query(DatabaseHelper.TABLE_MILESTONE, columns, null, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+
+    public int updateMilestone(long _id, String name, String desc) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.KEY_SUBJECT, name);
+        contentValues.put(DatabaseHelper.KEY_DESC, desc);
+        int i = database.update(DatabaseHelper.TABLE_MILESTONE, contentValues, DatabaseHelper.KEY_ID + " = " + _id, null);
+        return i;
+    }
+    //----------------------------------------------------------------------------------------------
+    public void insertTask(String name, String desc) {
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(DatabaseHelper.KEY_SUBJECT, name);
+        contentValue.put(DatabaseHelper.KEY_DESC, desc);
+        database.insert(DatabaseHelper.TABLE_TASK, null, contentValue);
+    }
+
+    public Cursor fetchTask() {
+        String[] columns = new String[] { DatabaseHelper.KEY_ID, DatabaseHelper.KEY_SUBJECT, DatabaseHelper.KEY_DESC};
+        Cursor cursor = database.query(DatabaseHelper.TABLE_TASK, columns, null, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+
+    public int updateTask(long _id, String name, String desc) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.KEY_SUBJECT, name);
+        contentValues.put(DatabaseHelper.KEY_DESC, desc);
+        int i = database.update(DatabaseHelper.TABLE_TASK, contentValues, DatabaseHelper.KEY_ID + " = " + _id, null);
+        return i;
+    }
 }
 

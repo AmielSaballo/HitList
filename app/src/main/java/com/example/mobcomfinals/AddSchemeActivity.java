@@ -40,7 +40,7 @@ public class AddSchemeActivity extends Activity implements OnClickListener {
                 final String name = schemeName.getText().toString();
                 final String desc = schemeDesc.getText().toString();
 
-                dbManager.insert(name, desc);
+                dbManager.insertScheme(name, desc);
 
                 Intent main = new Intent(AddSchemeActivity.this, ViewHitListActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

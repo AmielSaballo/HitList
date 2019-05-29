@@ -55,7 +55,7 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
                 String title = titleText.getText().toString();
                 String desc = descText.getText().toString();
 
-                dbManager.update(_id, title, desc);
+                dbManager.updateScheme(_id, title, desc);
                 this.returnHome();
                 break;
 

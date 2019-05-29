@@ -20,8 +20,8 @@ public class ViewHitListActivity extends AppCompatActivity {
 
     private SimpleCursorAdapter adapter;
 
-    final String[] from = new String[] { DatabaseHelper._ID,
-            DatabaseHelper.SUBJECT, DatabaseHelper.DESC };
+    final String[] from = new String[] { DatabaseHelper.KEY_ID,
+            DatabaseHelper.KEY_SUBJECT, DatabaseHelper.KEY_DESC};
 
     final int[] to = new int[] { R.id.id, R.id.title, R.id.desc };
 
@@ -32,7 +32,7 @@ public class ViewHitListActivity extends AppCompatActivity {
 
         dbManager = new DBManager(this);
         dbManager.open();
-        Cursor cursor = dbManager.fetch();
+        Cursor cursor = dbManager.fetchSchemes();
 
         listView = (ListView) findViewById(R.id.schemeList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
@@ -54,12 +54,15 @@ public class ViewHitListActivity extends AppCompatActivity {
                 String title = titleTextView.getText().toString();
                 String desc = descTextView.getText().toString();
 
-                Intent modify_intent = new Intent(getApplicationContext(), ModifySchemeActivity.class);
-                modify_intent.putExtra("title", title);
-                modify_intent.putExtra("desc", desc);
-                modify_intent.putExtra("id", id);
+//                Intent modify_intent = new Intent(getApplicationContext(), ModifySchemeActivity.class);
+//                modify_intent.putExtra("title", title);
+//                modify_intent.putExtra("desc", desc);
+//                modify_intent.putExtra("id", id);
 
-                startActivity(modify_intent);
+                Intent seeMilestones = new Intent(getApplicationContext(), ViewMilestoneActivity.class);
+                seeMilestones.putExtra("scheme_id",id);
+
+                startActivity(seeMilestones);
             }
         });
     }
