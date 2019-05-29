@@ -2,6 +2,9 @@ package com.example.mobcomfinals;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -50,25 +53,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
-//                TextView idTextView = (TextView) view.findViewById(R.id.id);
-//                TextView titleTextView = (TextView) view.findViewById(R.id.title);
-//                TextView descTextView = (TextView) view.findViewById(R.id.desc);
-//
-//                String id = idTextView.getText().toString();
-//                String title = titleTextView.getText().toString();
-//                String desc = descTextView.getText().toString();
-//
-//                Intent modify_intent = new Intent(getApplicationContext(), ModifySchemeActivity.class);
-//                modify_intent.putExtra("title", title);
-//                modify_intent.putExtra("desc", desc);
-//                modify_intent.putExtra("id", id);
-//
-//                Intent seeTasks = new Intent(getApplicationContext(), ViewTaskActivity.class);
-//                if (id !=null) {
-//                    seeTasks.putExtra("scheme_id", id);
-//
-//                    startActivity(seeTasks);
-//                }
+                view.setSelected(true);
             }
         });
     }
