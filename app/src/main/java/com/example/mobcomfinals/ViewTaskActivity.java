@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class ViewTaskActivity extends AppCompatActivity {
 
@@ -50,7 +51,13 @@ public class ViewTaskActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
-                view.setSelected(true);
+                TextView idTextView = (TextView) findViewById(R.id.id);
+                String id = idTextView.getText().toString();
+//                for (int i = 0; i < adapter.getCount(); ++i) {
+//                    view = listView.getChildAt(i);
+//                    view.setBackgroundColor(dbManager.getColor(_id, Long.parseLong(id)));
+//                }
+                getColor(parent , position, id);
             }
         });
     }
@@ -78,5 +85,12 @@ public class ViewTaskActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getColor(AdapterView<?> parent, int position, String id) {
+        long task_id = Long.parseLong(id);
+
+        View v = parent.getChildAt(position);
+        v.setBackgroundColor(dbManager.getColor(task_id));
     }
 }

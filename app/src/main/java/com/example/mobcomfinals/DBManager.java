@@ -27,7 +27,7 @@ public class DBManager {
     public void close() {
         dbHelper.close();
     }
-
+//--------------------------------------------------------------------------------------------------
     public void insertScheme(String name, String desc) {
         ContentValues contentValue = new ContentValues();
         contentValue.put(DatabaseHelper.KEY_TITLE, name);
@@ -113,11 +113,37 @@ public class DBManager {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.KEY_TITLE, name);
         contentValues.put(DatabaseHelper.KEY_DESC, desc);
+
         int i = database.update(DatabaseHelper.TABLE_TASK, contentValues, DatabaseHelper.KEY_ID + " = " + _id, null);
         return i;
     }
     public void deleteTask(long _id) {
         database.delete(DatabaseHelper.TABLE_TASK, DatabaseHelper.KEY_ID + "=" + _id, null);
+    }
+
+    public int taskDone (long _id, int color) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.KEY_COLOR, color);
+
+        String whereClause = DatabaseHelper.KEY_ID + " = " + _id;
+        //String[] whereArgs = new String[] {String.valueOf(_id)};
+
+        int i = database.update(DatabaseHelper.TABLE_TASK, contentValues, whereClause, null);
+        return i;
+    }
+
+    public int getColor (long _id) {
+        String[] columns = new String[] {DatabaseHelper.KEY_COLOR};
+        String whereClause = DatabaseHelper.KEY_ID + " = " + _id;
+        //String[] whereArg = {String.valueOf(_id)};
+
+        Cursor cursor = database.query(DatabaseHelper.TABLE_TASK, columns, whereClause, null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        int i = cursor.getInt(0);
+        return i;
     }
 }
 

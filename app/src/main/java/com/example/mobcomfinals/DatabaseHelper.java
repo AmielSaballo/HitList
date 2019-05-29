@@ -10,13 +10,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_SCHEME = "SCHEME";
     public static final String TABLE_MILESTONE = "MILESTONE";
     public static final String TABLE_TASK = "TASK";
-    public static final String TABLE_SMT = "SCHEME_MILESTONE_TASK";
 
     // Table columns
     public static final String KEY_ID = "_id";
     public static final String KEY_TITLE = "title";
     public static final String KEY_DESC = "description";
-    public static final String KEY_STATUS = "status";
+    public static final String KEY_COLOR = "color";
 
     //Foreign keys
     public static final String FK_SCHEME_ID = "scheme_id";
@@ -39,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT, "
-            + KEY_STATUS + " VARCHAR(191) NOT NULL DEFAULT 'Incomplete', "
+            + KEY_COLOR + " INTEGER DEFAULT '-65536', "
             + FK_SCHEME_ID + " INTEGER DEFAULT '0'"
             +");";
 
@@ -47,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT, "
-            + KEY_STATUS + " VARCHAR(191) NOT NULL DEFAULT 'Incomplete', "
+            + KEY_COLOR + " INTEGER DEFAULT '-65536', "
             + FK_MILESTONE_ID + " INTEGER DEFAULT '0'"
             + ");";
 

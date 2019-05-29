@@ -2,15 +2,17 @@ package com.example.mobcomfinals;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ModifyTaskActivity extends Activity implements View.OnClickListener {
 
     private EditText titleText;
-    private Button updateBtn, deleteBtn;
+    private Button updateBtn, deleteBtn, markAsDone;
     private EditText descText;
 
     private long _id;
@@ -35,6 +37,7 @@ public class ModifyTaskActivity extends Activity implements View.OnClickListener
 
         updateBtn = (Button) findViewById(R.id.btn_update);
         deleteBtn = (Button) findViewById(R.id.btn_delete);
+        markAsDone = (Button) findViewById(R.id.done_btn);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -49,6 +52,7 @@ public class ModifyTaskActivity extends Activity implements View.OnClickListener
 
         updateBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
+        markAsDone.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +68,11 @@ public class ModifyTaskActivity extends Activity implements View.OnClickListener
 
             case R.id.btn_delete:
                 dbManager.deleteTask(_id);
+                this.returnHome();
+                break;
+            case R.id.done_btn:
+
+                dbManager.taskDone(_id ,-16711936);
                 this.returnHome();
                 break;
         }
