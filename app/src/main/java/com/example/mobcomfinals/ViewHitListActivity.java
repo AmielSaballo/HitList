@@ -77,7 +77,7 @@ public class ViewHitListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if (id == R.id.add_scheme) {
+        if (id == R.id.menu_add) {
 
             Intent add_mem = new Intent(this, AddSchemeActivity.class);
             startActivity(add_mem);

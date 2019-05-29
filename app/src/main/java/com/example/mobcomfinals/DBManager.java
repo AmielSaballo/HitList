@@ -63,7 +63,7 @@ public class DBManager {
         database.insert(DatabaseHelper.TABLE_MILESTONE, null, contentValue);
     }
 
-    public Cursor fetchMilestone() {
+    public Cursor fetchMilestone(long _id) {
         String[] columns = new String[] { DatabaseHelper.KEY_ID, DatabaseHelper.KEY_SUBJECT, DatabaseHelper.KEY_DESC};
         Cursor cursor = database.query(DatabaseHelper.TABLE_MILESTONE, columns, null, null, null, null, null);
         if (cursor != null) {
@@ -87,7 +87,7 @@ public class DBManager {
         database.insert(DatabaseHelper.TABLE_TASK, null, contentValue);
     }
 
-    public Cursor fetchTask() {
+    public Cursor fetchTask(long _id) {
         String[] columns = new String[] { DatabaseHelper.KEY_ID, DatabaseHelper.KEY_SUBJECT, DatabaseHelper.KEY_DESC};
         Cursor cursor = database.query(DatabaseHelper.TABLE_TASK, columns, null, null, null, null, null);
         if (cursor != null) {

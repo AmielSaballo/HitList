@@ -2,7 +2,7 @@
     <string name="app_name">HitList</string>
     <string name="emptyScheme">Your HitList is empty. Please add something to do.</string>
     <string name="emptyMilestone">You have not yet added a milestone for this scheme.</string>
-    <string name="emptyTask">Your list HitList is empty. Please add something to do.</string>
+    <string name="emptyTask">You have not yet added a task for this milestone</string>
     <string name="add_Scheme">Add Scheme</string>
     <string name="add_milestone">Add Milestone</string>
     <string name="add_task">Add Task</string>
