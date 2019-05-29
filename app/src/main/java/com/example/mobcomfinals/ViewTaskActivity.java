@@ -51,13 +51,15 @@ public class ViewTaskActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
-                TextView idTextView = (TextView) findViewById(R.id.id);
+                TextView idTextView = (TextView) view.findViewById(R.id.id);
+
                 String id = idTextView.getText().toString();
-//                for (int i = 0; i < adapter.getCount(); ++i) {
-//                    view = listView.getChildAt(i);
-//                    view.setBackgroundColor(dbManager.getColor(_id, Long.parseLong(id)));
-//                }
-                getColor(parent , position, id);
+
+                long task_id = Long.parseLong(id);
+
+                int color = dbManager.getColor(task_id);
+                view = parent.getChildAt(position);
+                view.setBackgroundColor(color);
             }
         });
     }
@@ -87,10 +89,4 @@ public class ViewTaskActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getColor(AdapterView<?> parent, int position, String id) {
-        long task_id = Long.parseLong(id);
-
-        View v = parent.getChildAt(position);
-        v.setBackgroundColor(dbManager.getColor(task_id));
-    }
 }
