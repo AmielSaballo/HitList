@@ -33,13 +33,6 @@ public class ViewMilestoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestone_view);
 
-        String scheme_id = getIntent().getStringExtra("scheme_id");
-        _id = Long.parseLong(scheme_id);
-
-        if (scheme_id != null) {
-            return;
-        }
-
         dbManager = new DBManager(this);
         dbManager.open();
         Cursor cursor = dbManager.fetchMilestones();
@@ -52,7 +45,7 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // OnCLickListiner For List Items
+        // OnCLickListener For List Items
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
@@ -69,10 +62,12 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 //                modify_intent.putExtra("desc", desc);
 //                modify_intent.putExtra("id", id);
 
-                Intent seeTask = new Intent(getApplicationContext(), ViewTaskActivity.class);
-                seeTask.putExtra("Milestone_id", id);
+                Intent seeTasks = new Intent(getApplicationContext(), ViewTaskActivity.class);
+                if (id !=null) {
+                    seeTasks.putExtra("scheme_id", id);
 
-                startActivity(seeTask);
+                    startActivity(seeTasks);
+                }
             }
         });
     }
@@ -88,9 +83,8 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == R.id.menu_add) {
-            Intent add_mem = new Intent(this, AddMilestoneActivity.class);
-            add_mem.putExtra("scheme_id", String.valueOf(_id));
 
+            Intent add_mem = new Intent(this, AddMilestoneActivity.class);
             startActivity(add_mem);
 
         }

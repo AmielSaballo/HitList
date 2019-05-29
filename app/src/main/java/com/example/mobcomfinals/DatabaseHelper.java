@@ -40,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT, "
             + KEY_STATUS + " VARCHAR(191) NOT NULL DEFAULT 'Incomplete', "
-            + FK_SCHEME_ID + " INTEGER "
+            + FK_SCHEME_ID + " INTEGER DEFAULT '0'"
             +");";
 
     private static final String CREATE_TABLE_TASK = "create table " + TABLE_TASK
@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT, "
             + KEY_STATUS + " VARCHAR(191) NOT NULL DEFAULT 'Incomplete', "
-            + FK_MILESTONE_ID + "TEXT NOT NULL"
+            + FK_MILESTONE_ID + " INTEGER DEFAULT '0'"
             + ");";
 
     public DatabaseHelper(Context context) {
