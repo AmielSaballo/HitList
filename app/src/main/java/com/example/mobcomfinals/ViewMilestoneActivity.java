@@ -33,9 +33,12 @@ public class ViewMilestoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestone_view);
 
+        String scheme_id = getIntent().getStringExtra("scheme_id");
+        _id = Long.parseLong(scheme_id);
+
         dbManager = new DBManager(this);
         dbManager.open();
-        Cursor cursor = dbManager.fetchMilestones();
+        Cursor cursor = dbManager.fetchMilestones(_id);
 
         listView = (ListView) findViewById(R.id.milestoneList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
@@ -64,7 +67,7 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
                 Intent seeTasks = new Intent(getApplicationContext(), ViewTaskActivity.class);
                 if (id !=null) {
-                    seeTasks.putExtra("scheme_id", id);
+                    seeTasks.putExtra("milestone_id", id);
 
                     startActivity(seeTasks);
                 }
@@ -85,6 +88,7 @@ public class ViewMilestoneActivity extends AppCompatActivity {
         if (id == R.id.menu_add) {
 
             Intent add_mem = new Intent(this, AddMilestoneActivity.class);
+            add_mem.putExtra("scheme_id", String.valueOf(_id));
             startActivity(add_mem);
 
         }
