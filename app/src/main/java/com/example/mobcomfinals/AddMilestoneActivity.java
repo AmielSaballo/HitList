@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 public class AddMilestoneActivity extends Activity implements OnClickListener {
 
@@ -39,13 +40,19 @@ public class AddMilestoneActivity extends Activity implements OnClickListener {
 
                 final String name = milestoneName.getText().toString();
                 final String desc = milestoneDesc.getText().toString();
+                final String scheme_id = getIntent().getStringExtra("scheme_id");
 
-                dbManager.insertMilestone(name, desc);
+                Toast.makeText(this,
+                        scheme_id,
+                        Toast.LENGTH_LONG).show();
 
-                Intent main = new Intent(AddMilestoneActivity.this, ViewMilestoneActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                dbManager.insertMilestone(name, desc, scheme_id);
 
-                startActivity(main);
+//                Intent main = new Intent(AddMilestoneActivity.this, ViewMilestoneActivity.class)
+//                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                main.putExtra("scheme_id",scheme_id);
+//
+//                startActivity(main);
                 break;
         }
     }

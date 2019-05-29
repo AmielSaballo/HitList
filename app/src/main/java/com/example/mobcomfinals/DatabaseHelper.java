@@ -14,13 +14,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Table columns
     public static final String KEY_ID = "_id";
-    public static final String KEY_SUBJECT = "subject";
+    public static final String KEY_TITLE = "title";
     public static final String KEY_DESC = "description";
     public static final String KEY_STATUS = "status";
 
     //Foreign keys
-    public static final String FK_SCHEME_ID = "FK_Scheme_id";
-    public static final String FK_MILESTONE_ID = "FK_Milestone_id";
+    public static final String FK_SCHEME_ID = "scheme_id";
+    public static final String FK_MILESTONE_ID = "milestone_id";
 
     // Database Information
     static final String DB_NAME = "HitList.DB";
@@ -32,23 +32,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_SCHEME = "create table " + TABLE_SCHEME
             + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + KEY_SUBJECT + " TEXT NOT NULL, "
+            + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT);";
 
     private static final String CREATE_TABLE_MILESTONE = "create table " + TABLE_MILESTONE
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + KEY_SUBJECT + " TEXT NOT NULL, "
+            + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT, "
-            + KEY_STATUS + " TEXT NOT NULL DEFAULT 'Incomplete', "
-            + "CONSTRAINT " + FK_SCHEME_ID + " FOREIGN KEY (_id) REFERENCES SCHEME(_id)"
+            + KEY_STATUS + " VARCHAR(191) NOT NULL DEFAULT 'Incomplete', "
+            + FK_SCHEME_ID + " INTEGER "
             +");";
 
     private static final String CREATE_TABLE_TASK = "create table " + TABLE_TASK
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + KEY_SUBJECT + " TEXT NOT NULL, "
+            + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT, "
-            + KEY_STATUS + " TEXT NOT NULL DEFAULT 'Incomplete', "
-            + "CONSTRAINT " + FK_MILESTONE_ID + " FOREIGN KEY (_id) REFERENCES MILESTONE(_id)"
+            + KEY_STATUS + " VARCHAR(191) NOT NULL DEFAULT 'Incomplete', "
+            + FK_MILESTONE_ID + "TEXT NOT NULL"
             + ");";
 
     public DatabaseHelper(Context context) {

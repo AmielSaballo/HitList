@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewMilestoneActivity extends AppCompatActivity {
 
@@ -20,10 +21,8 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
     private SimpleCursorAdapter adapter;
 
-    long _id;
-
     final String[] from = new String[] { DatabaseHelper.KEY_ID,
-            DatabaseHelper.KEY_SUBJECT, DatabaseHelper.KEY_DESC};
+            DatabaseHelper.KEY_TITLE, DatabaseHelper.KEY_DESC};
 
     final int[] to = new int[] { R.id.id, R.id.title, R.id.desc };
 
@@ -32,9 +31,20 @@ public class ViewMilestoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestone_view);
 
-        Intent scheme = getIntent();
-        String scheme_id = scheme.getStringExtra("scheme_id");
-        _id = Long.parseLong(scheme_id);
+        String scheme_id = getIntent().getStringExtra("scheme_id");
+        long _id = 50;
+//        Toast.makeText(this,
+//                scheme_id,
+//                Toast.LENGTH_LONG).show();
+        if (scheme_id != null) {
+            return;
+        }else {
+//            _id = Long.parseLong(scheme_id);
+        }
+//        String scheme_id = scheme.getStringExtra("scheme_id");
+//        if (scheme_id != null) {
+//            _id = Long.parseLong(scheme_id);
+//        }
 
         dbManager = new DBManager(this);
         dbManager.open();
@@ -65,10 +75,10 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 //                modify_intent.putExtra("desc", desc);
 //                modify_intent.putExtra("id", id);
 
-                Intent seeMilestones = new Intent(getApplicationContext(), ViewMilestoneActivity.class);
-                seeMilestones.putExtra("Milestone_id", id);
+                Intent seeTask = new Intent(getApplicationContext(), ViewTaskActivity.class);
+                seeTask.putExtra("Milestone_id", id);
 
-                startActivity(seeMilestones);
+                startActivity(seeTask);
             }
         });
     }
@@ -84,8 +94,14 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == R.id.menu_add) {
-
+            long _id = 50;
             Intent add_mem = new Intent(this, AddMilestoneActivity.class);
+            add_mem.putExtra("scheme_id", _id);
+
+            Toast.makeText(this,
+                    String.valueOf(_id),
+                    Toast.LENGTH_LONG).show();
+
             startActivity(add_mem);
 
         }

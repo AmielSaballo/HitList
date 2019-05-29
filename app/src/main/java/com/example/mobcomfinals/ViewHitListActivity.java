@@ -21,7 +21,7 @@ public class ViewHitListActivity extends AppCompatActivity {
     private SimpleCursorAdapter adapter;
 
     final String[] from = new String[] { DatabaseHelper.KEY_ID,
-            DatabaseHelper.KEY_SUBJECT, DatabaseHelper.KEY_DESC};
+            DatabaseHelper.KEY_TITLE, DatabaseHelper.KEY_DESC};
 
     final int[] to = new int[] { R.id.id, R.id.title, R.id.desc };
 
@@ -42,7 +42,7 @@ public class ViewHitListActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // OnCLickListiner For List Items
+        // OnCLickListener For List Items
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
@@ -60,9 +60,11 @@ public class ViewHitListActivity extends AppCompatActivity {
 //                modify_intent.putExtra("id", id);
 
                 Intent seeMilestones = new Intent(getApplicationContext(), ViewMilestoneActivity.class);
-                seeMilestones.putExtra("scheme_id",id);
+                if (id !=null) {
+                    seeMilestones.putExtra("scheme_id", id);
 
-                startActivity(seeMilestones);
+                    startActivity(seeMilestones);
+                }
             }
         });
     }
