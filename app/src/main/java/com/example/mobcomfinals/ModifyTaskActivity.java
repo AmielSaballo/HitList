@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ModifyTaskActivity extends Activity implements View.OnClickListener {
 
@@ -72,7 +73,8 @@ public class ModifyTaskActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.done_btn:
 
-                dbManager.taskDone(_id ,-16711936);
+                dbManager.taskDone(_id ,Color.rgb( 	117, 209, 140));
+                Toast.makeText(this, String.valueOf(Color.rgb(211,26,56)), Toast.LENGTH_SHORT).show();
                 this.returnHome();
                 break;
         }

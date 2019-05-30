@@ -38,7 +38,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT, "
-            + KEY_COLOR + " INTEGER DEFAULT '-65536', "
             + FK_SCHEME_ID + " INTEGER DEFAULT '0'"
             +");";
 
@@ -46,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_TITLE + " TEXT NOT NULL, "
             + KEY_DESC + " TEXT, "
-            + KEY_COLOR + " INTEGER DEFAULT '-65536', "
+            + KEY_COLOR + " INTEGER DEFAULT '-3050637', "
             + FK_MILESTONE_ID + " INTEGER DEFAULT '0'"
             + ");";
 
