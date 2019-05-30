@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-public class ViewMilestoneActivity extends AppCompatActivity {
+public class ViewTaskActivity extends AppCompatActivity {
 
     private DBManager dbManager;
 
@@ -30,16 +30,16 @@ public class ViewMilestoneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_milestone_view);
+        setContentView(R.layout.activity_view_task);
 
-        String scheme_id = getIntent().getStringExtra("scheme_id");
-        _id = Long.parseLong(scheme_id);
+        String milestone_id = getIntent().getStringExtra("milestone_id");
+        _id = Long.parseLong(milestone_id);
 
         dbManager = new DBManager(this);
         dbManager.open();
-        Cursor cursor = dbManager.fetchMilestones(_id);
+        Cursor cursor = dbManager.fetchTasks(_id);
 
-        listView = (ListView) findViewById(R.id.milestoneList);
+        listView = (ListView) findViewById(R.id.taskList);
         listView.setEmptyView(findViewById(R.id.lblEmpty));
 
         adapter = new SimpleCursorAdapter(this, R.layout.activity_listview_view, cursor, from, to, 0);
@@ -55,10 +55,11 @@ public class ViewMilestoneActivity extends AppCompatActivity {
 
                 String id = idTextView.getText().toString();
 
-                Intent seeTasks = new Intent(getApplicationContext(), ViewTaskActivity.class);
-                seeTasks.putExtra("milestone_id", id);
+                long task_id = Long.parseLong(id);
 
-                startActivity(seeTasks);
+                int color = dbManager.getColor(task_id);
+                view = parent.getChildAt(position);
+                view.setBackgroundColor(color);
             }
         });
     }
@@ -75,16 +76,17 @@ public class ViewMilestoneActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.menu_add:
-                Intent add_mem = new Intent(this, AddMilestoneActivity.class);
-                add_mem.putExtra("scheme_id", String.valueOf(_id));
+                Intent add_mem = new Intent(this, AddTaskActivity.class);
+                add_mem.putExtra("milestone_id", String.valueOf(_id));
                 startActivity(add_mem);
                 break;
             case R.id.Edit:
-                Intent edit_mem = new Intent(this, ListModifyMilestone.class);
-                edit_mem.putExtra("scheme_id", String.valueOf(_id));
+                Intent edit_mem = new Intent(this, ListModifyTask.class);
+                edit_mem.putExtra("milestone_id", String.valueOf(_id));
                 startActivity(edit_mem);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

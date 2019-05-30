@@ -1,9 +1,27 @@
 <resources>
     <string name="app_name">HitList</string>
-    <string name="empty">Your list HitList is empty. Please add something to do.</string>
-    <string name="add_Scheme">Add Scheme</string>
-    <string name="enter_desc">Describe this Scheme</string>
-    <string name="enter_scheme">Name of Scheme</string>
-    <string name="update">Update</string>
+    <string name="emptyScheme">Your HitList is empty. Please add something to do.</string>
+    <string name="emptyMilestone">You have not yet added a milestone for this scheme.</string>
+    <string name="emptyTask">You have not yet added a task for this milestone</string>
+    <string name="add_scheme">Add Scheme</string>
+    <string name="add_milestone">Add Milestone</string>
+    <string name="add_task">Add Task</string>
+    <string name="scheme_desc">Describe this Scheme</string>
+    <string name="scheme_name">Name of Scheme</string>
+    <string name="milestone_desc">Describe this Milestone</string>
+    <string name="milestone_name">Name of Milestone</string>
+    <string name="task_desc">Describe this Task</string>
+    <string name="task_name">Name of Task</string>
+    <string name="update_btn">Update</string>
+    <string name="edit">Edit</string>
+    <string name="add">Add</string>
     <string name="delete">Delete</string>
+    <string name="done">Mark As Done</string>
+
+    <string name="app_scheme">Schemes</string>
+    <string name="app_milestone">Milestones</string>
+    <string name="app_task">Tasks</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="edit_milestone">Edit Milestone</string>
+    <string name="edit_scheme">Edit Scheme</string>
 </resources>

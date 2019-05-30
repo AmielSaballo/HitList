@@ -6,7 +6,7 @@
     android:padding="10dp" >
 
     <EditText
-        android:id="@+id/schemeName"
+        android:id="@+id/milestoneName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -14,7 +14,7 @@
         android:hint="@string/scheme_name" />
 
     <EditText
-        android:id="@+id/schemeDesc"
+        android:id="@+id/milestoneDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

@@ -7,13 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class ModifySchemeActivity extends Activity implements View.OnClickListener {
+public class ModifyMilestoneActivity extends Activity implements View.OnClickListener {
 
     private EditText titleText;
     private Button updateBtn, deleteBtn;
     private EditText descText;
 
     private long _id;
+
+    private long scheme_id;
 
     private DBManager dbManager;
 
@@ -23,13 +25,13 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
         setTitle("Modify Record");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify_scheme);
+        setContentView(R.layout.activity_modify_milestone);
 
         dbManager = new DBManager(this);
         dbManager.open();
 
-        titleText = (EditText) findViewById(R.id.schemeName);
-        descText = (EditText) findViewById(R.id.schemeDesc);
+        titleText = (EditText) findViewById(R.id.milestoneName);
+        descText = (EditText) findViewById(R.id.milestoneDesc);
 
         updateBtn = (Button) findViewById(R.id.btn_update);
         deleteBtn = (Button) findViewById(R.id.btn_delete);
@@ -39,6 +41,7 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
         String name = intent.getStringExtra("title");
         String desc = intent.getStringExtra("desc");
 
+        scheme_id = Long.parseLong(intent.getStringExtra("scheme_id"));
         _id = Long.parseLong(id);
 
         titleText.setText(name);
@@ -55,20 +58,21 @@ public class ModifySchemeActivity extends Activity implements View.OnClickListen
                 String title = titleText.getText().toString();
                 String desc = descText.getText().toString();
 
-                dbManager.updateScheme(_id, title, desc);
+                dbManager.updateMilestone(_id, title, desc);
                 this.returnHome();
                 break;
 
             case R.id.btn_delete:
-                dbManager.deleteScheme(_id);
+                dbManager.deleteMilestone(_id);
                 this.returnHome();
                 break;
         }
     }
 
     public void returnHome() {
-        Intent home_intent = new Intent(getApplicationContext(), ViewHitListActivity.class)
+        Intent home_intent = new Intent(getApplicationContext(), ViewMilestoneActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        home_intent.putExtra("scheme_id", String.valueOf(scheme_id));
         startActivity(home_intent);
     }
 }

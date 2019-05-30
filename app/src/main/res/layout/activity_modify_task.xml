@@ -6,19 +6,19 @@
     android:padding="10dp" >
 
     <EditText
-        android:id="@+id/schemeName"
+        android:id="@+id/taskName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:hint="@string/scheme_name" />
+        android:hint="@string/task_name" />
 
     <EditText
-        android:id="@+id/schemeDesc"
+        android:id="@+id/taskDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/scheme_desc"
+        android:hint="@string/task_desc"
         android:inputType="textMultiLine"
         android:minLines="5" >
     </EditText>
@@ -45,5 +45,11 @@
             android:layout_weight="1"
             android:text="@string/delete" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/done_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/done" />
 
 </LinearLayout>
