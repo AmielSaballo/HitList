@@ -9,19 +9,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListModifyScheme"></activity>
-        <activity android:name=".ListModifyMilestone" />
-        <activity android:name=".ListModifyTask" />
-        <activity android:name=".AddTaskActivity" />
-        <activity android:name=".AddMilestoneActivity" />
-        <activity android:name=".ModifyTaskActivity" />
-        <activity android:name=".ModifyMilestoneActivity" />
-        <activity android:name=".ViewTaskActivity" />
-        <activity android:name=".ModifySchemeActivity" />
-        <activity android:name=".AddSchemeActivity" />
-        <activity android:name=".ViewMilestoneActivity" />
+        <activity android:name=".ListModifyScheme"
+            android:label="@string/edit_scheme">
+        </activity>
+        <activity android:name=".ListModifyMilestone"
+            android:label="@string/edit_milestone" />
+        <activity android:name=".ListModifyTask"
+            android:label="@string/edit_task"/>
+        <activity android:name=".AddTaskActivity"
+            android:label="@string/add_task"/>
+        <activity android:name=".AddMilestoneActivity"
+            android:label="@string/add_milestone"/>
+        <activity android:name=".ModifyTaskActivity"
+            android:label="@string/edit_task"/>
+        <activity android:name=".ModifyMilestoneActivity"
+            android:label="@string/edit_milestone"/>
+        <activity android:name=".ViewTaskActivity"
+            android:label="@string/app_task"/>
+        <activity android:name=".ModifySchemeActivity"
+            android:label="@string/edit_scheme"/>
+        <activity android:name=".AddSchemeActivity"
+            android:label="@string/add_scheme"/>
+        <activity android:name=".ViewMilestoneActivity"
+            android:label="@string/app_milestone"/>
         <activity android:name=".DBManager" />
-        <activity android:name=".ViewHitListActivity">
+        <activity android:name=".ViewHitListActivity"
+            android:label="@string/app_scheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

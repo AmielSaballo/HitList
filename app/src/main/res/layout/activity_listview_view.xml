@@ -35,7 +35,6 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@id/id"
         android:focusable="false"
-        android:background="@drawable/my_drawable"
     />
 
     <TextView
