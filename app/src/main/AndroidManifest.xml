@@ -34,7 +34,7 @@
             android:label="@string/app_milestone"/>
         <activity android:name=".DBManager" />
         <activity android:name=".ViewHitListActivity"
-            android:label="@string/app_scheme">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
