@@ -1,2 +1,3 @@
 # HitList
-MobCom1 Finals
+
+Finals project for Mobile Computing 1 class
